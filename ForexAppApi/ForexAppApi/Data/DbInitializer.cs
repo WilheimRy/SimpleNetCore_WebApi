@@ -12,7 +12,7 @@ namespace ForexAppApi.Data
         {
             context.Database.EnsureCreated();
 
-            // Look for any students.
+            // Look for any existing forex tables.
             if (context.ForexDetails.Any())
             {
                 return;   // DB has been seeded
@@ -20,12 +20,10 @@ namespace ForexAppApi.Data
 
             var forexDetails = new ForexDetail[]
             {
-                //new Student{FirstName="Carson",Surname="Alexander", Age = 30, GradeLevel = 'A'},
-                //new Student{FirstName="Meredith",Surname="Alonso",Age = 33, GradeLevel = 'B'},
-                //new Student{FirstName="Arturo",Surname="Anand",Age = 31, GradeLevel = 'C'},
-                //new Student{FirstName="Gytis",Surname="Barzdukas",Age = 29, GradeLevel = 'D'},
-                //new Student{FirstName="Yan",Surname="Li",Age = 28, GradeLevel = 'A'},
-                //new Student{FirstName="Peggy",Surname="Justice",Age = 27, GradeLevel = 'B'},
+                new ForexDetail{CurrencyCode="EURUSD", OrderStatus = OrderStatus.ACTIVE, OrderAction = OrderAction.BUY, OrderResult = OrderResult.PENDING, OrderOpenPrice = 1.18111, OrderTakeProfitPrice = 1.19000, OrderStopLossPrice = 1.18000, OrderOpenTime = new DateTime(2020,11,14) },
+                new ForexDetail{CurrencyCode="EURUSD", OrderStatus = OrderStatus.ACTIVE, OrderAction = OrderAction.BUY, OrderResult = OrderResult.PENDING, OrderOpenPrice = 1.18333, OrderTakeProfitPrice = 1.19000, OrderStopLossPrice = 1.18000, OrderOpenTime = new DateTime(2020,11,14) },
+                new ForexDetail{CurrencyCode="AUDUSD", OrderStatus = OrderStatus.ACTIVE, OrderAction = OrderAction.SELL, OrderResult = OrderResult.PENDING, OrderOpenPrice = 0.72222, OrderTakeProfitPrice = 0.73000, OrderStopLossPrice = 0.71000, OrderOpenTime = new DateTime(2020,11,14) },
+                new ForexDetail{CurrencyCode="AUDUSD", OrderStatus = OrderStatus.ACTIVE, OrderAction = OrderAction.SELL, OrderResult = OrderResult.PENDING, OrderOpenPrice = 0.73333, OrderTakeProfitPrice = 0.73000, OrderStopLossPrice = 0.71000, OrderOpenTime = new DateTime(2020,11,14) },
             };
             foreach (var fx in forexDetails)
             {

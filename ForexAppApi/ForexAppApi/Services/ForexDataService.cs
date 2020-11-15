@@ -19,23 +19,23 @@ namespace ForexAppApi.Services
         {
             if (forexDetail == null)
             {
-                throw new Exception("student can not be null");
+                throw new Exception("forex can not be null");
             }
 
             _forexDbContext.ForexDetails.Add(forexDetail);
             _forexDbContext.SaveChanges();
         }
 
-        public IEnumerable<ForexDetail> FindAll()
+        public IQueryable<ForexDetail> FindAll()
         {
-            return _forexDbContext.ForexDetails.ToList();
+            return _forexDbContext.ForexDetails;
         }
 
         //Todo: need to think how to trigger this 
-
-        public IEnumerable<ForexDetail> FindLatestForexDetail()
+        
+        public ForexDetail GetLatestForexDetail()
         {
-            return _forexDbContext.ForexDetails.ToList();
+            return _forexDbContext.ForexDetails.Last();
         }
     }
 }

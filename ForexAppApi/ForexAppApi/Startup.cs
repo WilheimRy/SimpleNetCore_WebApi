@@ -29,7 +29,7 @@ namespace ForexAppApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ForexDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("Production")));
 
             services.AddControllers();
 
@@ -50,7 +50,7 @@ namespace ForexAppApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -59,6 +59,13 @@ namespace ForexAppApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ForexData API");
+                c.RoutePrefix = "";
             });
         }
     }
