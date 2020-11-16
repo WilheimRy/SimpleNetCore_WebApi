@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ForexAppApi.Services;
 using ForexAppApi.Model;
+using System.Text.Json;
+
 
 namespace ForexAppApi.Controllers
 {
@@ -30,8 +32,9 @@ namespace ForexAppApi.Controllers
 
         // url: api/ForexData/forexDetail
         [HttpPost("forexDetail")]
-        public void Post([FromBody] ForexDetail forexDetail)
+        public void Post([FromBody] string forexDetailStr)
         {
+            var forexDetail = JsonSerializer.Deserialize<ForexDetail>(forexDetailStr);
             _forexDataService.Add(forexDetail);
 
         }
