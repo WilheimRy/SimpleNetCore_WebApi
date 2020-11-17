@@ -33,6 +33,12 @@ namespace ForexAppApi
 
             services.AddControllers();
 
+            services.AddLogging(config =>
+            {
+                config.AddAWSProvider(Configuration.GetAWSLoggingConfigSection());
+                config.SetMinimumLevel(LogLevel.Debug);
+            });
+
             services.AddSwaggerGen();
         }
 

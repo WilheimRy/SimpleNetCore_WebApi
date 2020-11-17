@@ -8,14 +8,14 @@ namespace ForexAppApi.Model
     public class ForexDetail
     {
         public int Id { get; set; }
-        public string CurrencyCode { get; set; }
-        public OrderStatus OrderStatus { get; set; }
+        public string? CurrencyCode { get; set; }
+        public OrderStatus? OrderStatus { get; set; }
         public OrderResult? OrderResult { get; set; }
-        public OrderAction OrderAction { get; set; }
-        public double OrderOpenPrice { get; set; }
+        public OrderAction? OrderAction { get; set; }
+        public double? OrderOpenPrice { get; set; }
         public double? OrderTakeProfitPrice { get; set; }
         public double? OrderStopLossPrice { get; set; }
-        public DateTime OrderOpenTime { get; set; }
+        public DateTime? OrderOpenTime { get; set; }
         public DateTime? OrderCloseTime { get; set; }
 
     }
