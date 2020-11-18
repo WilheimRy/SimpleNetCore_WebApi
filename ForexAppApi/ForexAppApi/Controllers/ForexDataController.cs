@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ForexAppApi.Services;
 using ForexAppApi.Model;
-using System.Text.Json;
+using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
+
 
 
 namespace ForexAppApi.Controllers
@@ -17,11 +19,14 @@ namespace ForexAppApi.Controllers
     {
         private readonly IForexDataService _forexDataService;
 
-        public ForexDataController(IForexDataService forexDataService)
+        private readonly ILogger _logger;
+
+        public ForexDataController(IForexDataService forexDataService,
+                                    ILogger<ForexDataController> logger)
         {
             _forexDataService = forexDataService;
+            _logger = logger;
         }
-
 
         [HttpGet]
         public IEnumerable<ForexDetail> Get()
@@ -30,13 +35,22 @@ namespace ForexAppApi.Controllers
         }
 
 
-        // url: api/ForexData/forexDetail
-        [HttpPost("forexDetail")]
-        public void Post([FromBody] string forexDetailStr)
+
+        // url: api/ForexData/createNewOrder
+        [HttpPost("createNewOrder")]
+        [Consumes("application/x-www-form-urlencoded")]
+        public void Post([FromForm] IFormCollection keyValuePairs)
         {
-            var forexDetail = JsonSerializer.Deserialize<ForexDetail>(forexDetailStr);
+            foreach (var item in keyValuePairs)
+            {
+                _logger.LogInformation("key: " + item.Key+", value: "+item.Value);
+            }
+
+            var forexDetail = _forexDataService.getForexDetaiObj(keyValuePairs);
+
             _forexDataService.Add(forexDetail);
 
         }
+
     }
 }
